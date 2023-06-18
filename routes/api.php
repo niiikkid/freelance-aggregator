@@ -14,7 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::any('test', function () {
+    /**
+     * @var \App\Models\TelegramUser $telegramUser
+     */
+    $telegramUser = \App\Models\TelegramUser::first();
 
+    $telegramUser->orders()->attach([
+        1 => [
+            'allowed' => null,
+            'reviewed' => false,
+        ],
+    ]);
 });
 
 Route::any('telegram-bot/webhook', function () {

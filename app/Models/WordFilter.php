@@ -6,6 +6,7 @@ use App\Enums\FilterWordTypeEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -29,7 +30,7 @@ class WordFilter extends Model
         'type' => FilterWordTypeEnum::class,
     ];
 
-    public function telegramUser()
+    public function telegramUser(): BelongsTo
     {
         return $this->belongsTo(TelegramUser::class);
     }
