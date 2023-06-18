@@ -12,7 +12,7 @@ class KworkCrawler extends BaseCrawler
 {
     public function getSourceName(): FreelanceEnum
     {
-        return FreelanceEnum::FREELANCE;
+        return FreelanceEnum::KWORK;
     }
 
     /**

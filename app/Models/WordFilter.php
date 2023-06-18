@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $id
  * @property string $word
  * @property FilterWordTypeEnum $type
- * @property TelegramUser $telegram_user
+ * @property TelegramUser $telegramUser
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */

@@ -3,9 +3,9 @@
 namespace App\Contracts;
 
 use App\Models\Order;
-use Illuminate\Support\Collection;
+use App\Models\TelegramUser;
 
 interface OrderFilterServiceContract
 {
-    public function filter(Collection $orders): Collection;
+    public function isAllowed(Order $order, TelegramUser $telegramUser): bool;
 }

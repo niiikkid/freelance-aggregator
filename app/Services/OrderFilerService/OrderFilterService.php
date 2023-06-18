@@ -4,18 +4,14 @@ namespace App\Services\OrderFilerService;
 
 use App\Contracts\OrderFilterServiceContract;
 use App\Models\Order;
-use Illuminate\Support\Collection;
+use App\Models\TelegramUser;
 
 class OrderFilterService implements OrderFilterServiceContract
 {
-    /**
-     * @param Collection<int, Order> $orders
-     * @return Collection<int, Order>
-     */
-    public function filter(Collection $orders): Collection
+    public function isAllowed(Order $order, TelegramUser $telegramUser): bool
     {
-        
 
-        return $orders;
+
+        return false;
     }
 }

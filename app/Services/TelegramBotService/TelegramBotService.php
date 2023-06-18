@@ -14,6 +14,10 @@ class TelegramBotService implements TelegramBotServiceContract
 
     public function handleWebhook(): void
     {
-        $this->telegram->commandsHandler(true);
+        try {
+            $this->telegram->commandsHandler(true);
+        } catch (\Throwable $e) {
+            report($e);
+        }
     }
 }

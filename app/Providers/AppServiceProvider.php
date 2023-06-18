@@ -7,11 +7,13 @@ use App\Contracts\OrderCollectorServiceContract;
 use App\Contracts\OrderFilterServiceContract;
 use App\Contracts\OrderServiceContract;
 use App\Contracts\TelegramBotServiceContract;
+use App\Contracts\WorkLineServiceContract;
 use App\Services\FreelanceCrawlerService\FreelanceCrawlerService;
 use App\Services\OrderCollector\OrderCollectorService;
 use App\Services\OrderFilerService\OrderFilterService;
 use App\Services\OrderService\OrderService;
 use App\Services\TelegramBotService\TelegramBotService;
+use App\Services\WorkLineService\WorkLineService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(OrderCollectorServiceContract::class, OrderCollectorService::class);
         $this->app->bind(OrderFilterServiceContract::class, OrderFilterService::class);
         $this->app->bind(TelegramBotServiceContract::class, TelegramBotService::class);
+        $this->app->bind(WorkLineServiceContract::class, WorkLineService::class);
     }
 
     /**
