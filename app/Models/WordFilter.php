@@ -3,9 +3,18 @@
 namespace App\Models;
 
 use App\Enums\FilterWordTypeEnum;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property string $word
+ * @property FilterWordTypeEnum $type
+ * @property TelegramUser $telegram_user
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ */
 class WordFilter extends Model
 {
     use HasFactory;
@@ -13,9 +22,15 @@ class WordFilter extends Model
     protected $fillable = [
         'word',
         'type',
+        'telegram_user_id',
     ];
 
     protected $casts = [
         'type' => FilterWordTypeEnum::class,
     ];
+
+    public function telegramUser()
+    {
+        return $this->belongsTo(TelegramUser::class);
+    }
 }
