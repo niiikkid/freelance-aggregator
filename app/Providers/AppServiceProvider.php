@@ -12,9 +12,7 @@ use App\Services\OrderCollector\OrderCollectorService;
 use App\Services\OrderFilerService\OrderFilterService;
 use App\Services\OrderService\OrderService;
 use App\Services\TelegramBotService\TelegramBotService;
-use App\Telegram\Commands\StartCommand;
 use Illuminate\Support\ServiceProvider;
-use Telegram\Bot\Laravel\Facades\Telegram;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,9 +26,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(OrderCollectorServiceContract::class, OrderCollectorService::class);
         $this->app->bind(OrderFilterServiceContract::class, OrderFilterService::class);
         $this->app->bind(TelegramBotServiceContract::class, TelegramBotService::class);
-
-        //Telegram
-        Telegram::addCommand(StartCommand::class);
     }
 
     /**

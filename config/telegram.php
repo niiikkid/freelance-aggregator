@@ -1,5 +1,9 @@
 <?php
 
+use App\Telegram\Commands\AddStopWordCommand;
+use App\Telegram\Commands\DeleteStopWordCommand;
+use App\Telegram\Commands\ShowStopWordListCommand;
+use App\Telegram\Commands\StartCommand;
 use Telegram\Bot\Commands\HelpCommand;
 
 return [
@@ -127,6 +131,10 @@ return [
     */
     'commands' => [
         HelpCommand::class,
+        StartCommand::class,
+        AddStopWordCommand::class,
+        DeleteStopWordCommand::class,
+        ShowStopWordListCommand::class,
     ],
 
     /*
