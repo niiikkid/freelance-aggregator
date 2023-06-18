@@ -11,6 +11,7 @@ class OrderService implements OrderServiceContract
     public function create(CreateOrderDTO $dto): Order
     {
         return Order::create([
+            'external_id' => $dto->external_id,
             'freelance' => $dto->freelance,
             'title' => $dto->title,
             'link' => $dto->link,

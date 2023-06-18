@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
 
+            $table->longText('external_id')->nullable();
             $table->string('freelance')->nullable();
             $table->longText('title')->nullable();
             $table->longText('link')->nullable();

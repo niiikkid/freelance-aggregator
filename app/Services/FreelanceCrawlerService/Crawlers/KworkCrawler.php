@@ -57,6 +57,7 @@ class KworkCrawler extends BaseCrawler
 
             foreach ($feed as $item) {
                 $orders->push(new FeedItemValue(
+                    guid: $item['id'],
                     title: $item['name'],
                     link: 'https://kwork.ru/projects/' . $item['id'],
                     description: $item['desc'],

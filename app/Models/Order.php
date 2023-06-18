@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property int $id
+ * @property string $external_id
  * @property FreelanceEnum $freelance
  * @property string $title
  * @property string $link
@@ -24,6 +25,7 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
+        'external_id',
         'freelance',
         'title',
         'link',

@@ -9,6 +9,7 @@ use JsonSerializable;
 class FeedItemValue implements Arrayable, JsonSerializable
 {
     public function __construct(
+        public string $guid,
         public string $title,
         public string $link,
         public string $description,

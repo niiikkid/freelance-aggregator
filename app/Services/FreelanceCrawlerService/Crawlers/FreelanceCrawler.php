@@ -28,6 +28,7 @@ class FreelanceCrawler extends BaseCrawler
         $orders = collect();
         foreach ($feed->get_items() as $item) {
             $orders->push(new FeedItemValue(
+                guid: $item->get_id(),
                 title: $item->get_title(),
                 link: $item->get_link(),
                 description: $item->get_description(),
