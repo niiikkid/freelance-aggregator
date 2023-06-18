@@ -17,6 +17,7 @@ return new class extends Migration
             $table->longText('word')->nullable();
             $table->string('type')->nullable();
 
+            $table->unsignedBigInteger('telegram_user_id')->nullable();
             $table->foreign('telegram_user_id')
                 ->references('id')
                 ->on('telegram_users')

@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property int $id
+ * @property string $first_name
+ * @property string $username
  * @property int $telegram_id
  * @property Collection<int, WordFilter> $wordFilters
  * @property Carbon $created_at
@@ -19,7 +21,8 @@ class TelegramUser extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'first_name',
+        'username',
         'telegram_id',
     ];
 

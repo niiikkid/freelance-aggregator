@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('telegram_users', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name')->nullable();
-            $table->unsignedBigInteger('telegram_id')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('username')->unique()->nullable();
+            $table->unsignedBigInteger('telegram_id')->unique()->nullable();
 
             $table->timestamps();
         });

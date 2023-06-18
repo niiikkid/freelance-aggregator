@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::any('test', function () {
-    $feed = make(\App\Contracts\FreelanceCrawlerServiceContract::class)
-        ->crawl(
-            new \App\Services\FreelanceCrawlerService\Crawlers\FreelanceCrawler()
-        );
 
-    return $feed->toArray();
 });
+
+Route::any('telegram-bot/webhook', function () {
+    make(\App\Contracts\TelegramBotServiceContract::class)
+        ->handleWebhook();
+});
+
