@@ -2,20 +2,17 @@
 
 namespace App\Telegram\Commands;
 
-use App\Enums\WordFilterTypeEnum;
-use App\Models\TelegramUser;
-use App\Models\WordFilter;
 use Telegram\Bot\Commands\Command;
 
-class AddStopWordCommand extends Command
+class SetOrderReviewedCommand extends Command
 {
-    protected string $name = 'add_stop_word';
-    protected string $pattern = '{stop_word}';
-    protected string $description = 'Добавляет новое стоп слово.';
+    protected string $name = 'set_order_reviewed';
+    protected string $pattern = '{order}';
+    protected string $description = 'Заказ обработан.';
 
     public function handle()
     {
-        $telegramUser = TelegramUser::where([
+        /*$telegramUser = TelegramUser::where([
             'telegram_id' => $this->getUpdate()->getChat()->getId()
         ])->first();
 
@@ -26,10 +23,10 @@ class AddStopWordCommand extends Command
             'word' => $stop_word,
             'type' => WordFilterTypeEnum::STOP_WORD,
             'telegram_user_id' => $telegramUser->id,
-        ]);
+        ]);*/
 
         $this->replyWithMessage([
-            'text' => "Стоп слово сохранено: $wordFilter->word"
+            'text' => "Успех"
         ]);
     }
 }

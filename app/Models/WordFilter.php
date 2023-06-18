@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\FilterWordTypeEnum;
+use App\Enums\WordFilterTypeEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property int $id
  * @property string $word
- * @property FilterWordTypeEnum $type
+ * @property WordFilterTypeEnum $type
  * @property TelegramUser $telegramUser
  * @property Carbon $created_at
  * @property Carbon $updated_at
@@ -27,7 +27,7 @@ class WordFilter extends Model
     ];
 
     protected $casts = [
-        'type' => FilterWordTypeEnum::class,
+        'type' => WordFilterTypeEnum::class,
     ];
 
     public function telegramUser(): BelongsTo

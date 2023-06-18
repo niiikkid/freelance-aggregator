@@ -5,7 +5,7 @@ namespace App\Enums;
 use App\Traits\Enum\Compare;
 use App\Traits\Enum\Values;
 
-enum FilterWordTypeEnum: string
+enum WordFilterTypeEnum: string
 {
     use Values, Compare;
 

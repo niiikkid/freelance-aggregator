@@ -2,7 +2,7 @@
 
 namespace App\Telegram\Commands;
 
-use App\Enums\FilterWordTypeEnum;
+use App\Enums\WordFilterTypeEnum;
 use App\Models\TelegramUser;
 use App\Models\WordFilter;
 use Telegram\Bot\Commands\Command;
@@ -16,7 +16,7 @@ class DeleteStopWordCommand extends Command
     public function handle()
     {
         $telegramUser = TelegramUser::where([
-            'telegram_id' => $this->getUpdate()->getMessage()->from->id
+            'telegram_id' => $this->getUpdate()->getChat()->getId()
         ])->first();
 
         $stop_word_id = $this->argument('id');
@@ -24,7 +24,7 @@ class DeleteStopWordCommand extends Command
 
         $wordFilter = $telegramUser->wordFilters()
             ->where('id', $stop_word_id)
-            ->where('type', FilterWordTypeEnum::STOP_WORD)
+            ->where('type', WordFilterTypeEnum::STOP_WORD)
             ->first();
 
         if ($wordFilter) {

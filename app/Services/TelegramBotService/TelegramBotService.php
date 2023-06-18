@@ -4,6 +4,8 @@ namespace App\Services\TelegramBotService;
 
 use App\Contracts\TelegramBotServiceContract;
 use Telegram\Bot\Api;
+use Telegram\Bot\Helpers\Entities;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class TelegramBotService implements TelegramBotServiceContract
 {
@@ -15,7 +17,18 @@ class TelegramBotService implements TelegramBotServiceContract
     public function handleWebhook(): void
     {
         try {
-            $this->telegram->commandsHandler(true);
+            $update = $this->telegram->commandsHandler(true);
+
+            if ($update->callbackQuery) {
+                $this->telegram->answerCallbackQuery([
+                    'callback_query_id' => $update->callbackQuery->getId(),
+                ]);
+
+                if ($update->callbackQuery->getData()) {
+                    info();
+                    $this->telegram->getCommandBus()->execute($update->callbackQuery->getData(), $update, []);
+                }
+            }
         } catch (\Throwable $e) {
             report($e);
         }

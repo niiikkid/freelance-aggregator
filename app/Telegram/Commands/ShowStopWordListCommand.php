@@ -2,7 +2,7 @@
 
 namespace App\Telegram\Commands;
 
-use App\Enums\FilterWordTypeEnum;
+use App\Enums\WordFilterTypeEnum;
 use App\Models\TelegramUser;
 use App\Models\WordFilter;
 use Telegram\Bot\Commands\Command;
@@ -17,12 +17,13 @@ class ShowStopWordListCommand extends Command
         /**
          * @var TelegramUser $telegramUser
          */
+
         $telegramUser = TelegramUser::where([
-            'telegram_id' => $this->getUpdate()->getMessage()->from->id
+            'telegram_id' => $this->getUpdate()->getChat()->getId()
         ])->first();
 
         $stop_words = $telegramUser->wordFilters()
-            ->where('type', FilterWordTypeEnum::STOP_WORD)
+            ->where('type', WordFilterTypeEnum::STOP_WORD)
             ->get();
 
         $text = "Ваши стоп слова:\r\n";

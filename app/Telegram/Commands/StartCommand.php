@@ -13,7 +13,7 @@ class StartCommand extends Command
     public function handle()
     {
         $telegramUser = TelegramUser::where([
-            'telegram_id' => $this->getUpdate()->getMessage()->from->id
+            'telegram_id' => $this->getUpdate()->getChat()->getId()
         ])->first();
 
         if (! $telegramUser) {
@@ -21,7 +21,7 @@ class StartCommand extends Command
                 [
                     'first_name' => $this->getUpdate()->getMessage()->from->first_name,
                     'username' => $this->getUpdate()->getMessage()->from->username,
-                    'telegram_id' => $this->getUpdate()->getMessage()->from->id
+                    'telegram_id' => $this->getUpdate()->getChat()->getId()
                 ]
             );
 

@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::any('test', function () {
-    dd(\App\Models\WordFilter::first()->telegramUser);
+
 });
 
 Route::any('telegram-bot/webhook', function () {

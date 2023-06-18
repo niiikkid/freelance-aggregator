@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Contracts\WorkLineServiceContract;
-use App\Enums\FilterWordTypeEnum;
+use App\Enums\WordFilterTypeEnum;
 use App\Models\WordFilter;
 
 class WordFilterObserver
@@ -14,7 +14,7 @@ class WordFilterObserver
     {
         $wordFilter->load('telegramUser');
 
-        if ($wordFilter->type->equals(FilterWordTypeEnum::STOP_WORD)) {
+        if ($wordFilter->type->equals(WordFilterTypeEnum::STOP_WORD)) {
             make(WorkLineServiceContract::class)->reprocessOrdersOfTelegramUser(
                 $wordFilter->telegramUser
             );
@@ -25,7 +25,7 @@ class WordFilterObserver
     {
         $wordFilter->load('telegramUser');
 
-        if ($wordFilter->type->equals(FilterWordTypeEnum::STOP_WORD)) {
+        if ($wordFilter->type->equals(WordFilterTypeEnum::STOP_WORD)) {
             make(WorkLineServiceContract::class)->reprocessOrdersOfTelegramUser(
                 $wordFilter->telegramUser
             );
