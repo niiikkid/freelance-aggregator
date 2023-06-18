@@ -2,6 +2,7 @@
 
 namespace App\Services\FreelanceCrawlerService;
 
+use App\Contracts\FreelanceCrawlerServiceContract;
 use App\Services\FreelanceCrawlerService\Crawlers\BaseCrawler;
 use App\Services\FreelanceCrawlerService\ValueObject\FeedValue;
 

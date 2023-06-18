@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::any('test', function () {
-    $feed = make(\App\Services\FreelanceCrawlerService\FreelanceCrawlerServiceContract::class)
+    $feed = make(\App\Contracts\FreelanceCrawlerServiceContract::class)
         ->crawl(
             new \App\Services\FreelanceCrawlerService\Crawlers\FreelanceCrawler()
         );

@@ -4,6 +4,7 @@ namespace App\Services\FreelanceCrawlerService\Crawlers;
 
 use App\Enums\FreelanceEnum;
 use App\Services\FreelanceCrawlerService\ValueObject\FeedItemValue;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 
@@ -60,7 +61,7 @@ class KworkCrawler extends BaseCrawler
                     link: 'https://kwork.ru/projects/' . $item['id'],
                     description: $item['desc'],
                     category: $item['attrs'][0]['title'],
-                    published_at: \Carbon\Carbon::parse($item['date_create']),
+                    published_at: Carbon::parse($item['date_create']),
                 ));
             }
         }

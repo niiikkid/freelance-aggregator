@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\FreelanceCrawlerService;
+namespace App\Contracts;
 
 use App\Services\FreelanceCrawlerService\Crawlers\BaseCrawler;
 use App\Services\FreelanceCrawlerService\ValueObject\FeedValue;
