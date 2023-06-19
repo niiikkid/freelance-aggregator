@@ -22,9 +22,7 @@ class SetOrderReviewedEvent extends BaseEvent
             return null;
         }
 
-        return new self(
-            Order::find($order)
-        );
+        return new self($order);
     }
 
     public function getCallbackData(): string
