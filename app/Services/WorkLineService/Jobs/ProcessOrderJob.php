@@ -3,6 +3,7 @@
 namespace App\Services\WorkLineService\Jobs;
 
 use App\Contracts\OrderFilterServiceContract;
+use App\Enums\QueueEnum;
 use App\Models\Order;
 use App\Models\TelegramUser;
 use Illuminate\Bus\Queueable;
@@ -24,7 +25,7 @@ class ProcessOrderJob implements ShouldQueue
     )
     {
         $this->afterCommit();
-        $this->onQueue('work-line');
+        $this->onQueue(QueueEnum::WORK_LINE->value);
     }
 
     /**

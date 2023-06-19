@@ -4,6 +4,7 @@ namespace App\Services\OrderCollector\Jobs;
 
 use App\Contracts\FreelanceCrawlerServiceContract;
 use App\Contracts\OrderServiceContract;
+use App\Enums\QueueEnum;
 use App\Models\Order;
 use App\Services\FreelanceCrawlerService\Crawlers\BaseCrawler;
 use App\Services\FreelanceCrawlerService\ValueObject\FeedItemValue;
@@ -27,7 +28,7 @@ class CollectOrdersJob implements ShouldQueue
     )
     {
         $this->afterCommit();
-        $this->onQueue('orders-collector');
+        $this->onQueue(QueueEnum::ORDERS_COLLECTOR->value);
     }
 
     /**
