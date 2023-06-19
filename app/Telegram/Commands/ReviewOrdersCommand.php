@@ -59,8 +59,7 @@ class ReviewOrdersCommand extends Command
         $published_at = $order->published_at->toDateTimeString('minute');
         $title = $this->prepareText($order->title);
         $description = $this->prepareText($order->description);
-info($title);
-info($description);
+
         $this->replyWithMessage([
             'text' => "*$freelance:* $title\r\n\r\n$description\r\n\r\n*Опубликован:* $published_at\r\n\r\n*Всего заказов:* $orders_count",
             'reply_markup' => $keyboard,
