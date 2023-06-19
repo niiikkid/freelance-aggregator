@@ -9,7 +9,7 @@ use App\Contracts\TelegramBotServiceContract;
 use App\Contracts\WorkLineServiceContract;
 use App\Services\FreelanceCrawlerService\FreelanceCrawlerService;
 use App\Services\OrderCollector\OrderCollectorService;
-use App\Services\OrderFilerService\OrderFilterService;
+use App\Services\OrderFilterService\OrderFilterService;
 use App\Services\TelegramBotService\TelegramBotService;
 use App\Services\WorkLineService\WorkLineService;
 use Illuminate\Support\ServiceProvider;

@@ -33,10 +33,10 @@ class FLCrawler extends BaseCrawler
             $orders->push(
                 new FeedItemValue(
                     guid: $item->get_id(),
-                    title: $item->get_title(),
+                    title: html_entity_decode($item->get_title()),
                     link: $item->get_link(),
-                    description: $item->get_description(),
-                    category: $item->get_category(),
+                    description: html_entity_decode($item->get_description()),
+                    category: html_entity_decode($item->get_category()),
                     published_at: Carbon::parse($item->get_date()),
                 )
             );

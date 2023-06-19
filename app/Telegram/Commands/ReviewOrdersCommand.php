@@ -32,6 +32,10 @@ class ReviewOrdersCommand extends Command
             ->orderByDesc('published_at')
             ->first();
 
+        if (! $order) {
+            return;
+        }
+
         $orders_count = $telegramUser->orders()
             ->wherePivot('reviewed', 0)
             ->wherePivot('allowed', 1)
@@ -51,12 +55,30 @@ class ReviewOrdersCommand extends Command
                 Keyboard::inlineButton(['text' => 'Посмотреть', 'url' => $order->link])
             ]);
 
-        $response = $this->replyWithMessage([
-            'text' => "{$order->freelance->value}: $order->title\r\n\r\n$order->description\r\n\r\nВсего заказов: $orders_count",
-            'reply_markup' => $keyboard
+        $freelance = ucfirst($order->freelance->value);
+        $published_at = $order->published_at->toDateTimeString('minute');
+        $title = $this->prepareText($order->title);
+        $description = $this->prepareText($order->description);
+info($title);
+info($description);
+        $this->replyWithMessage([
+            'text' => "*$freelance:* $title\r\n\r\n$description\r\n\r\n*Опубликован:* $published_at\r\n\r\n*Всего заказов:* $orders_count",
+            'reply_markup' => $keyboard,
+            'parse_mode' => 'markdown'
         ]);
+    }
 
+    protected function prepareText(string $text): string
+    {
+        preg_match_all('~[a-z]+://\S+~miu', $text, $matches);
 
-        //info($response->getMessageId());
+        foreach ($matches[0] as $match) {
+            $text = str_replace($match, "[Ссылка]($match)", $text);
+        }
+
+        $text = str_replace('*', '\*', $text);
+        $text = str_replace('_', ' ', $text);
+
+        return $text;
     }
 }

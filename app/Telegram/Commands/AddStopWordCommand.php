@@ -10,7 +10,7 @@ use Telegram\Bot\Commands\Command;
 class AddStopWordCommand extends Command
 {
     protected string $name = 'add_stop_word';
-    protected string $pattern = '{stop_word}';
+    protected string $pattern = '{stop_word: .+}';
     protected string $description = 'Добавляет новое стоп слово.';
 
     public function handle()
@@ -20,7 +20,7 @@ class AddStopWordCommand extends Command
         ])->first();
 
         $stop_word = $this->argument('stop_word');
-        $stop_word = trim($stop_word);
+        $stop_word = strtolower(trim($stop_word));
 
         $wordFilter = WordFilter::create([
             'word' => $stop_word,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\OrderFilerService;
+namespace App\Services\OrderFilterService;
 
 use App\Contracts\OrderFilterServiceContract;
 use App\Enums\WordFilterTypeEnum;
@@ -23,11 +23,11 @@ class OrderFilterService implements OrderFilterServiceContract
         $result = true;
 
         foreach ($filters as $filter) {
-            if (preg_match("/".$filter->word."/miu", $order->title)) {
+            if (preg_match("/".$filter->word."/miu", strtolower($order->title))) {
                 return false;
             }
 
-            if (preg_match("/".$filter->word."/miu", $order->description)) {
+            if (preg_match("/".$filter->word."/miu", strtolower($order->description))) {
                 return false;
             }
         }

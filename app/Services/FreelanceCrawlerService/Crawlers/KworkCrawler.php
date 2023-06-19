@@ -31,10 +31,10 @@ class KworkCrawler extends BaseCrawler
         foreach ($feed as $item) {
             $orders->push(new FeedItemValue(
                 guid: $item['id'],
-                title: $item['name'],
+                title: html_entity_decode($item['name']),
                 link: 'https://kwork.ru/projects/' . $item['id'],
-                description: $item['desc'],
-                category: $item['attrs'][0]['title'],
+                description: html_entity_decode($item['desc']),
+                category: html_entity_decode($item['attrs'][0]['title']),
                 published_at: Carbon::parse($item['date_create']),
             ));
         }
