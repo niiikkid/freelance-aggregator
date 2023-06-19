@@ -27,7 +27,7 @@ class SetTelegramWebhookUrlCommand extends Command
     public function handle()
     {
         Telegram::setWebhook([
-            'url' => 'https://0bd0-217-150-75-43.ngrok-free.app/api/telegram-bot/webhook'
+            'url' => 'https://c20e-217-150-75-43.ngrok-free.app/api/telegram-bot/webhook'
         ]);
     }
 }
