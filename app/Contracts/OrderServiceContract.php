@@ -7,5 +7,5 @@ use App\Services\OrderService\DTO\CreateOrderDTO;
 
 interface OrderServiceContract
 {
-    public function create(CreateOrderDTO $dto): Order;
+    public function createIfNotExists(CreateOrderDTO $dto): Order;
 }

@@ -2,21 +2,18 @@
 
 namespace App\Services\OrderCollector\Features;
 
-use App\Enums\QueueEnum;
+use App\Services\FreelanceCrawlerService\Crawlers\BaseCrawler;
 use App\Services\FreelanceCrawlerService\Crawlers\FLCrawler;
 use App\Services\FreelanceCrawlerService\Crawlers\FreelanceCrawler;
 use App\Services\FreelanceCrawlerService\Crawlers\KworkCrawler;
 use App\Services\OrderCollector\Jobs\CollectOrdersJob;
-use Illuminate\Support\Facades\Bus;
 
 class CollectOrders //TODO если я захочу сделать много пользователей и каждому свои настройки, то тут надо менять, страницы которые парсим
 {
     public function collect(): void
     {
-        $chain = [
-            new CollectOrdersJob(new FLCrawler('https://www.fl.ru/rss/all.xml?category=3')), //TODO
-            new CollectOrdersJob(new FreelanceCrawler('https://freelance.ru/rss/feed/list/s.590.40')),
-        ];
+        $this->dispatchCrawler(new FLCrawler('https://www.fl.ru/rss/all.xml?category=3'));
+        $this->dispatchCrawler(new FreelanceCrawler('https://freelance.ru/rss/feed/list/s.590.40'));
 
         $pages = [
             ['c' => 24, 'attr' => 398966,],
@@ -28,11 +25,13 @@ class CollectOrders //TODO если я захочу сделать много п
         ];
 
         foreach ($pages as $page) {
-            $chain[] = new CollectOrdersJob(new KworkCrawler($page));
+            $this->dispatchCrawler(new KworkCrawler($page));
         }
-
-        Bus::chain($chain)
-            ->onQueue(QueueEnum::ORDERS_COLLECTOR->value)
-            ->dispatch();
+    }
+    protected function dispatchCrawler(BaseCrawler $crawler): void
+    {
+        dispatch(
+            new CollectOrdersJob($crawler)
+        );
     }
 }
