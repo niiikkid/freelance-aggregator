@@ -2,9 +2,10 @@
 
 namespace App\Telegram\Commands;
 
-use App\Enums\WordFilterTypeEnum;
 use App\Models\Order;
 use App\Models\TelegramUser;
+use App\Services\TelegramBotService\CallbackEvent\CallbackEvent;
+use App\Services\TelegramBotService\CallbackEvent\Events\SetOrderReviewedEvent;
 use Telegram\Bot\Commands\Command;
 use Telegram\Bot\Keyboard\Keyboard;
 
@@ -37,19 +38,25 @@ class ReviewOrdersCommand extends Command
             ->count();
 
 
-        $keyboard = Keyboard::make([
-            'inline_keyboard' => [
-                [
-                    ['text' => 'Закрыть', 'callback_data' => "set_order_reviewed $order->id"],
-                    ['text' => 'Посмотреть', 'url' => $order->link]]
-            ],
-            'resize_keyboard' => true,
-            'one_time_keyboard' => true,
-        ]);
+        $callback_data = make(CallbackEvent::class)->make(
+            new SetOrderReviewedEvent($order)
+        );
 
-        $this->replyWithMessage([
+        $keyboard = Keyboard::make([
+            'resize_keyboard' => true,
+        ])
+            ->inline()
+            ->row([
+                Keyboard::inlineButton(['text' => 'Закрыть', 'callback_data' => $callback_data]),
+                Keyboard::inlineButton(['text' => 'Посмотреть', 'url' => $order->link])
+            ]);
+
+        $response = $this->replyWithMessage([
             'text' => "{$order->freelance->value}: $order->title\r\n\r\n$order->description\r\n\r\nВсего заказов: $orders_count",
             'reply_markup' => $keyboard
         ]);
+
+
+        //info($response->getMessageId());
     }
 }

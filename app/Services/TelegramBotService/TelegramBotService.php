@@ -3,9 +3,8 @@
 namespace App\Services\TelegramBotService;
 
 use App\Contracts\TelegramBotServiceContract;
+use App\Services\TelegramBotService\CallbackEvent\CallbackEvent;
 use Telegram\Bot\Api;
-use Telegram\Bot\Helpers\Entities;
-use Telegram\Bot\Laravel\Facades\Telegram;
 
 class TelegramBotService implements TelegramBotServiceContract
 {
@@ -25,8 +24,7 @@ class TelegramBotService implements TelegramBotServiceContract
                 ]);
 
                 if ($update->callbackQuery->getData()) {
-                    info();
-                    $this->telegram->getCommandBus()->execute($update->callbackQuery->getData(), $update, []);
+                    make(CallbackEvent::class)->handle($update);
                 }
             }
         } catch (\Throwable $e) {

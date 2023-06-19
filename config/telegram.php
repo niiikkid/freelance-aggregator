@@ -3,7 +3,6 @@
 use App\Telegram\Commands\AddStopWordCommand;
 use App\Telegram\Commands\DeleteStopWordCommand;
 use App\Telegram\Commands\ReviewOrdersCommand;
-use App\Telegram\Commands\SetOrderReviewedCommand;
 use App\Telegram\Commands\ShowStopWordListCommand;
 use App\Telegram\Commands\StartCommand;
 use Telegram\Bot\Commands\HelpCommand;
@@ -138,7 +137,6 @@ return [
         DeleteStopWordCommand::class,
         ShowStopWordListCommand::class,
         ReviewOrdersCommand::class,
-        SetOrderReviewedCommand::class,
     ],
 
     /*
