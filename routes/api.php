@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::any('test', function () {
-    dd(strtolower('Обработка изображений'));
+
 });
 
 Route::any('telegram-bot/webhook', function () {

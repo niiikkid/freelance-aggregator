@@ -12,4 +12,5 @@ enum FreelanceEnum: string
     case FL = 'fl';
     case FREELANCE = 'freelance';
     case KWORK = 'kwork';
+    case ARTISTER = 'artister';
 }

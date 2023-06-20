@@ -2,6 +2,7 @@
 
 namespace App\Services\OrderCollector\Features;
 
+use App\Services\FreelanceCrawlerService\Crawlers\ArtisterCrawler;
 use App\Services\FreelanceCrawlerService\Crawlers\BaseCrawler;
 use App\Services\FreelanceCrawlerService\Crawlers\FLCrawler;
 use App\Services\FreelanceCrawlerService\Crawlers\FreelanceCrawler;
@@ -12,6 +13,7 @@ class CollectOrders //TODO если я захочу сделать много п
 {
     public function collect(): void
     {
+        $this->dispatchCrawler(new ArtisterCrawler('https://artister.ru/task/'));
         $this->dispatchCrawler(new FLCrawler('https://www.fl.ru/rss/all.xml?category=3'));
         $this->dispatchCrawler(new FreelanceCrawler('https://freelance.ru/rss/feed/list/s.590.40'));
 
