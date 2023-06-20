@@ -3,6 +3,7 @@
 namespace App\Services\OrderFilterService;
 
 use App\Contracts\OrderFilterServiceContract;
+use App\Enums\FreelanceEnum;
 use App\Enums\WordFilterTypeEnum;
 use App\Models\Order;
 use App\Models\TelegramUser;
@@ -13,6 +14,10 @@ class OrderFilterService implements OrderFilterServiceContract
 {
     public function isAllowed(Order $order, TelegramUser $telegramUser): bool
     {
+        if ($order->freelance->equals(FreelanceEnum::ARTISTER)) { //TODO создать функционал для этого
+            return true;
+        }
+
         /**
          * @var Collection<int, WordFilter> $filters
          */

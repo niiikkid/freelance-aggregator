@@ -56,8 +56,8 @@ class ArtisterCrawler extends BaseCrawler
             ->each(function (\Symfony\Component\DomCrawler\Crawler $node) use (&$feed) {
                 $feed[] = [
                     'guid' => $node->filter('.task_name')->attr('href'),
-                    'title' => $node->filter('.task_name')->attr('href'),
-                    'link' => $node->filter('.task_name')->text(),
+                    'title' => $node->filter('.task_name')->text(),
+                    'link' => $node->filter('.task_name')->attr('href'),
                     'description' => $node->filter('.clamp-line')->text(),
                     'category' => $node->filter('div')->last()->text(),
                     'published_at' => now()->toDateTimeString(),
