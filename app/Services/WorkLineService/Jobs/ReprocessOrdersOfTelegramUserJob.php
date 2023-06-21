@@ -39,15 +39,15 @@ class ReprocessOrdersOfTelegramUserJob implements ShouldQueue
                 ->wherePivot('reviewed', 0)
                 ->get()
                 ->each(function (Order $order) {
-                $is_allowed = make(OrderFilterServiceContract::class)
-                    ->isAllowed($order, $this->telegramUser);
+                    $is_allowed = make(OrderFilterServiceContract::class)
+                        ->isAllowed($order, $this->telegramUser);
 
-                $order->telegramUsers()
-                    ->wherePivot('reviewed', 0)
-                    ->updateExistingPivot($this->telegramUser->id, [
-                        'allowed' => $is_allowed,
-                    ]);
-            });
+                    $order->telegramUsers()
+                        ->wherePivot('reviewed', 0)
+                        ->updateExistingPivot($this->telegramUser->id, [
+                            'allowed' => $is_allowed,
+                        ]);
+                });
         });
     }
 }
