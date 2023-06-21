@@ -48,6 +48,8 @@ class OrderFilterService implements OrderFilterServiceContract
 
             $invalid = $invalid_title || $invalid_description;
             if ($invalid) {
+                $valid = false;
+
                 foreach ($cancel_filters as $cancel_filter) {
                     $valid_title = false;
                     $valid_description = false;
@@ -61,9 +63,14 @@ class OrderFilterService implements OrderFilterServiceContract
                     }
 
                     $valid = $valid_title || $valid_description;
-                    if (! $valid) {
-                        return false;
+
+                    if ($valid) {
+                        break;
                     }
+                }
+
+                if (! $valid) {
+                    return false;
                 }
             }
         }
