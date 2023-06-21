@@ -34,7 +34,11 @@ class ReprocessOrdersOfTelegramUserJob implements ShouldQueue
     public function handle(): void
     {
         DB::transaction(function () {
-            $this->telegramUser->orders->each(function (Order $order) {
+            $this->telegramUser
+                ->orders()
+                ->wherePivot('reviewed', 0)
+                ->get()
+                ->each(function (Order $order) {
                 $is_allowed = make(OrderFilterServiceContract::class)
                     ->isAllowed($order, $this->telegramUser);
 
