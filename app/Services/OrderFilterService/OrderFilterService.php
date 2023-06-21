@@ -19,21 +19,52 @@ class OrderFilterService implements OrderFilterServiceContract
         }
 
         /**
-         * @var Collection<int, WordFilter> $filters
+         * @var Collection<int, WordFilter> $stop_filters
          */
-        $filters = $telegramUser->wordFilters()
+        $stop_filters = $telegramUser->wordFilters()
             ->where('type', WordFilterTypeEnum::STOP)
+            ->get();
+
+        /**
+         * @var Collection<int, WordFilter> $cancel_filters
+         */
+        $cancel_filters = $telegramUser->wordFilters()
+            ->where('type', WordFilterTypeEnum::CANCEL)
             ->get();
 
         $result = true;
 
-        foreach ($filters as $filter) {
-            if (preg_match("/".$filter->word."/miu", strtolower($order->title))) {
-                return false;
+        foreach ($stop_filters as $stop_filter) {
+            $invalid_title = false;
+            $invalid_description = false;
+
+            if (preg_match("/".$stop_filter->word."/miu", strtolower($order->title))) {
+                $invalid_title = true;
             }
 
-            if (preg_match("/".$filter->word."/miu", strtolower($order->description))) {
-                return false;
+            if (preg_match("/".$stop_filter->word."/miu", strtolower($order->description))) {
+                $invalid_description = true;
+            }
+
+            $invalid = $invalid_title || $invalid_description;
+            if ($invalid) {
+                foreach ($cancel_filters as $cancel_filter) {
+                    $valid_title = false;
+                    $valid_description = false;
+
+                    if (preg_match("/".$cancel_filter->word."/miu", strtolower($order->title))) {
+                        $valid_title = true;
+                    }
+
+                    if (preg_match("/".$cancel_filter->word."/miu", strtolower($order->description))) {
+                        $valid_description = true;
+                    }
+
+                    $valid = $valid_title || $valid_description;
+                    if (! $valid) {
+                        return false;
+                    }
+                }
             }
         }
 
