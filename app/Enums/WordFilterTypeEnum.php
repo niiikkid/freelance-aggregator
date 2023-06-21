@@ -9,5 +9,6 @@ enum WordFilterTypeEnum: string
 {
     use Values, Compare;
 
-    case STOP_WORD = 'stop_word';
+    case STOP = 'stop';
+    case CANCEL = 'cancel';
 }

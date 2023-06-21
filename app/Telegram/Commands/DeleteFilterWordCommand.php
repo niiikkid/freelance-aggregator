@@ -7,11 +7,11 @@ use App\Models\TelegramUser;
 use App\Models\WordFilter;
 use Telegram\Bot\Commands\Command;
 
-class DeleteStopWordCommand extends Command
+class DeleteFilterWordCommand extends Command
 {
-    protected string $name = 'delete_stop_word';
+    protected string $name = 'delete_filter_word';
     protected string $pattern = '{id}';
-    protected string $description = 'Удаляет стоп слово.';
+    protected string $description = 'Удаляет фильтр-слово.';
 
     public function handle()
     {
@@ -19,23 +19,29 @@ class DeleteStopWordCommand extends Command
             'telegram_id' => $this->getUpdate()->getChat()->getId()
         ])->first();
 
-        $stop_word_id = $this->argument('id');
-        $stop_word_id = trim($stop_word_id);
+        $word_id = trim($this->argument('id'));
+
+        if (empty($word_id)) {
+            $this->replyWithMessage([
+                'text' => "Необходимо ввести id."
+            ]);
+
+            return;
+        }
 
         $wordFilter = $telegramUser->wordFilters()
-            ->where('id', $stop_word_id)
-            ->where('type', WordFilterTypeEnum::STOP_WORD)
+            ->where('id', $word_id)
             ->first();
 
         if ($wordFilter) {
             $this->replyWithMessage([
-                'text' => "Стоп слово $wordFilter->word удалено."
+                'text' => "Фильтр-слово слово $wordFilter->word удалено."
             ]);
 
             $wordFilter->delete();
         } else {
             $this->replyWithMessage([
-                'text' => "Стоп слово c id - $stop_word_id не существует."
+                'text' => "Фильтр-слово c id - $word_id не существует."
             ]);
         }
     }

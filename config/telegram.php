@@ -1,9 +1,9 @@
 <?php
 
-use App\Telegram\Commands\AddStopWordCommand;
-use App\Telegram\Commands\DeleteStopWordCommand;
+use App\Telegram\Commands\AddFilterWordCommand;
+use App\Telegram\Commands\DeleteFilterWordCommand;
 use App\Telegram\Commands\ReviewOrdersCommand;
-use App\Telegram\Commands\ShowStopWordListCommand;
+use App\Telegram\Commands\ShowFilterWordListCommand;
 use App\Telegram\Commands\StartCommand;
 use Telegram\Bot\Commands\HelpCommand;
 
@@ -133,9 +133,9 @@ return [
     'commands' => [
         HelpCommand::class,
         StartCommand::class,
-        AddStopWordCommand::class,
-        DeleteStopWordCommand::class,
-        ShowStopWordListCommand::class,
+        AddFilterWordCommand::class,
+        DeleteFilterWordCommand::class,
+        ShowFilterWordListCommand::class,
         ReviewOrdersCommand::class,
     ],
 

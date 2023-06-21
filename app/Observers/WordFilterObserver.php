@@ -14,7 +14,7 @@ class WordFilterObserver
     {
         $wordFilter->load('telegramUser');
 
-        if ($wordFilter->type->equals(WordFilterTypeEnum::STOP_WORD)) {
+        if ($wordFilter->type->equals(WordFilterTypeEnum::STOP)) {
             make(WorkLineServiceContract::class)->reprocessOrdersOfTelegramUser(
                 $wordFilter->telegramUser
             );
@@ -25,7 +25,7 @@ class WordFilterObserver
     {
         $wordFilter->load('telegramUser');
 
-        if ($wordFilter->type->equals(WordFilterTypeEnum::STOP_WORD)) {
+        if ($wordFilter->type->equals(WordFilterTypeEnum::STOP)) {
             make(WorkLineServiceContract::class)->reprocessOrdersOfTelegramUser(
                 $wordFilter->telegramUser
             );

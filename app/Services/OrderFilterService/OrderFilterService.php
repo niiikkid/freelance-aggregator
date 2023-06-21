@@ -22,7 +22,7 @@ class OrderFilterService implements OrderFilterServiceContract
          * @var Collection<int, WordFilter> $filters
          */
         $filters = $telegramUser->wordFilters()
-            ->where('type', WordFilterTypeEnum::STOP_WORD)
+            ->where('type', WordFilterTypeEnum::STOP)
             ->get();
 
         $result = true;
